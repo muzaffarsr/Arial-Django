@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+
+{% block title %}Arial - Manage{% endblock %}
+
+
+{% block body %}
+	<header>
+		<div class="container">
+			<div class="row">
+				<div class="col logo">
+					<a href="{% url 'home' %}">Arial</a>
+				</div>
+				<div class="col nav">
+					<ul>
+						<li class="nav-item"><a class="active" href="{% url 'manage' %}"><i class="fa-brands fa-product-hunt"></i> Products</a></li>
+						<li class="nav-item"><a href="{% url 'category' %}"><i class="fa-solid fa-filter"></i> Categorys</a></li>
+						<li class="nav-item"><a href="{% url 'feedbacks' %}"><i class="fa-solid fa-comment"></i> Feedbacks</a></li>
+					</ul>
+				</div>
+			</div>
+		</div>
+	</header>
+	<br>
+	<div class="container">
+		<div class="add_products info">
+			<h1>Edit Product</h1> <br>
+			<img class="product-item__img border-none" src="{{product.img}}" alt="">
+			<br>
+			<form method='POST'>
+				{% csrf_token %}
+				{{formValue.img}} <br>
+				{{formValue.name}} <br>
+				{{formValue.price}} <br>
+				{{formValue.category}} <br> <br>
+				<button class="btn-primary add-btn" type="submit">Save</button>
+			</form>
+		</div>
+	</div>
+	<br>
+	<div class="line"></div>
+	<br>
+	<h5 class="footer">&copy 2023 Arial MS</h5>
+	<br>
+	</div>
+{% endblock %}

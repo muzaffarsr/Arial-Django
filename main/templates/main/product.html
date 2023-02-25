@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+
+{% block title %}{{product.name}} - Arial{% endblock %}
+
+{% block body %}
+	<header>
+		<div class="container">
+			<div class="row">
+				<div class="col logo">
+					<a href="{% url 'home' %}">Arial</a>
+				</div>
+				<div class="col nav">
+					<ul>
+						<li class="nav-item"><a href="{% url 'home' %}" class="active"><i class="fa-solid fa-house"></i> Home</a></li>
+						<li class="nav-item"><a href="{% url 'leave_feedback' %}"><i class="fa-solid fa-comment"></i> Leave Feedback</a></li>
+					</ul>
+				</div>
+			</div>
+		</div>
+	</header>	
+
+	<div class="container">
+		<br>
+		<div class="row">
+			<div class="product-img">
+				<img class="info-img" src="{{product.img}}" alt="{{product.name}} - Image">
+			</div>
+
+			<div class="product-info">
+				<h3 class="product-info__name">{{product.name}}</h3>
+				<h4 class="product-info__price">{{product.price}} UZS</h4>
+				<br>
+				<a href="{% url 'customer' product.id %}" class="btn-primary">Buy</a>
+			</div>
+		</div>
+
+		<br>
+		<br>
+		<br>
+		<div class="line"></div>
+		<br>
+		<h5 class="footer">&copy 2023 Arial MS</h5>
+		<br>
+	</div>
+{% endblock %}

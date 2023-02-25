@@ -1,0 +1,81 @@
+{% extends 'base.html' %}
+
+{% block title %}Arial - Manage{% endblock %}
+
+
+{% block body %}
+	<header>
+		<div class="container">
+			<div class="row">
+				<div class="col logo">
+					<a href="{% url 'home' %}">Arial</a>
+				</div>
+				<div class="col nav">
+					<ul>
+						<li class="nav-item"><a class="active" href="{% url 'manage' %}"><i class="fa-brands fa-product-hunt"></i> Products</a></li>
+						<li class="nav-item"><a href="{% url 'category' %}"><i class="fa-solid fa-filter"></i> Categorys</a></li>
+						<li class="nav-item"><a href="{% url 'feedbacks' %}"><i class="fa-solid fa-comment"></i> Feedbacks</a></li>
+					</ul>
+				</div>
+			</div>
+		</div>
+	</header>
+	<br>
+	<div class="container">
+		<div class="main_info">
+			<div class="total_products info">
+				<h1 class="info__title">Total Products</h1>
+				<div class="info__line"></div>
+				<h3 class="info__body">{{ total }}</h3>
+			</div>
+			<div class="add_category info">
+				<h1>Add Category</h1> <br>
+				<form action="{% url 'add_category' %}" method="POST">
+					{% csrf_token %}
+					{{filterForm.name}} <br> <br>
+					<button class="btn-primary add-btn">Add Category</button>
+				</form>
+			</div>
+			<div class="add_products info">
+				<h1>Add Product</h1> <br>
+				<form method='POST'>
+					{% csrf_token %}
+					{{ form.img }} <br>
+					{{ form.name }} <br>
+					{{ form.price }} <br>
+					{{ form.category }} <br> <br>
+					<button class="btn-primary add-btn">Add Product</button>
+				</form>
+			</div>
+		</div>
+		<div class="products">
+			<div class="info-table">
+				<table>
+					<tr>
+						<th>Product Name</th>
+						<th>Product Price (UZS)</th>
+						<th>Product Category</th>
+						<th>Edit</th>
+						<th>Delete</th>
+					</tr>
+						
+					{% for product in products %}
+						<tr>
+							<td>{{product.name}}</td>
+							<td>{{product.price}} UZS</td>
+							<td>{{product.category}}</td>
+							<td><a href="{% url 'edit-product' product.id %}" class="btn-primary update-btn">Edit</a></td>
+							<td><a href="{% url 'del_product' product.id %}" class="btn-primary delete-btn">Delete</a></td>
+						</tr>
+					{% endfor %}	
+				</table>
+			</div>			
+		</div>
+	</div>
+	<br>
+	<div class="line"></div>
+	<br>
+	<h5 class="footer">&copy 2023 Arial MS</h5>
+	<br>
+	</div>
+{% endblock %}

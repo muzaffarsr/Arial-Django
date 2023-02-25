@@ -1,0 +1,63 @@
+{% extends 'base.html' %}
+
+
+{% block body %}
+	<header>
+		<div class="container">
+			<div class="row">
+				<div class="col logo">
+					<a href="{% url 'home' %}">Arial</a>
+				</div>
+				<div class="col nav">
+					<ul>
+						<li class="nav-item"><a href="{% url 'home' %}" class="active"><i class="fa-solid fa-house"></i> Home</a></li>
+						<li class="nav-item"><a href="{% url 'leave_feedback' %}"><i class="fa-solid fa-comment"></i> Leave Feedback</a></li>
+					</ul>
+				</div>
+			</div>
+		</div>
+	</header>	
+
+	<div class="container">
+		<br>
+		<div class="search">
+			<form action="{% url 'search' %}" method="get">
+				<input type="text" name="search" class="search__form" placeholder="Search">
+				<button type="submit" class="btn-primary search__btn">Search</button>
+			</form>
+		</div>
+		<br>
+		{% if filters %}
+		<h3 class="d-none">Filters:</h3>
+			<a href="{% url 'home' %}" class="primary">All,</a>
+			{% for filter in filters %}
+				<a href="{% url 'filter' filter.id %}" class="primary">{{filter.name}},</a>
+			{% endfor %}
+		{% else %}
+			<h3>No Filters</h3>
+		{% endif %}
+
+		<br>
+		<br>
+
+		{% if products %}
+			<div class="product-container">
+			{% for product in products %}
+				<div class="product-item">
+					<a href="{% url 'product' product.id %}"><img class="product-item__img" src="{{product.img}}"></a>
+					<a href="{% url 'product' product.id %}" class="product-item__name">{{product.name}}</a>
+					<p class="product-item__price">{{product.price}} UZS</p>
+				</div>
+			{% endfor %}
+			</div>
+		{% else %}
+			<h3>No Products</h3>
+		{% endif %}
+		<br>
+		<br>
+		<div class="line"></div>
+		<br>
+		<h5 class="footer">&copy 2023 Arial MS</h5>
+		<br>
+	</div>
+{% endblock %}

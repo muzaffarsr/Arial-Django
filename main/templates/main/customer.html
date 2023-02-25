@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+
+
+{% block body %}
+	<header>
+		<div class="container">
+			<div class="row">
+				<div class="col logo">
+					<a href="{% url 'home' %}">Arial</a>
+				</div>
+				<div class="col nav">
+					<ul>
+						<li class="nav-item"><a href="{% url 'home' %}" class="active"><i class="fa-solid fa-house"></i> Home</a></li>
+						<li class="nav-item"><a href="{% url 'leave_feedback' %}"><i class="fa-solid fa-comment"></i> Leave Feedback</a></li>
+					</ul>
+				</div>
+			</div>
+		</div>
+	</header>	
+
+	<div class="container">
+		<br>
+		<h1 class="txt-center">Product: {{ product.name }}</h1>
+		<h1 class="txt-center">Price: {{ product.price }}</h1>
+		<br>
+		<form method="POST">
+			{% csrf_token %}
+			{{ form.name }}
+			{{ form.phone }}
+			{{ form.addres }}
+			<button type="submit" class="btn-primary">Buy</button>
+		</form>
+	</div>
+
+	<br>
+	<br>
+	<div class="line"></div>
+	<br>
+	<h5 class="footer">&copy 2023 Arial MS</h5>
+	<br>
+{% endblock %}
